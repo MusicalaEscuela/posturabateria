@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <title>Postura en la Batería · Desde Cero</title>
+  <meta name="description" content="App educativa para aprender postura en la batería desde cero: explicación, práctica guiada, auto-chequeo y progreso guardado." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Postura en la Batería · Desde Cero" />
+  <meta property="og:description" content="Aprende postura en batería desde cero con módulos cortos: explicación, práctica y mini-chequeo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CO" />
+  <!-- Si quieren, creen un preview social y pónganlo aquí: -->
+  <!-- <meta property="og:image" content="images/og-preview.png" /> -->
+
+  <!-- PWA (opcional, por si después lo vuelven instalable) -->
+  <!-- <link rel="manifest" href="manifest.webmanifest" /> -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <!-- Favicon (si luego quieren agregar) -->
+  <!-- <link rel="icon" href="favicon.ico" /> -->
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;800;900&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Skip link (accesibilidad real, no adorno) -->
+  <a class="skipLink" href="#main">Saltar al contenido</a>
+
+  <header class="topbar" role="banner">
+    <div class="brand" aria-label="Marca">
+      <img
+        class="logo"
+        src="logo.png"
+        alt="Logo de Postura en la Batería"
+        loading="eager"
+        decoding="async"
+        width="44"
+        height="44"
+      />
+      <div class="brandText">
+        <div class="brandTitle">Postura en la Batería</div>
+        <div class="brandSub">Aprende desde cero (sin lesionarte por deporte)</div>
+      </div>
+    </div>
+
+    <nav class="topActions" aria-label="Acciones">
+      <button id="btnReset" class="btn ghost" type="button" title="Reiniciar progreso">
+        Reiniciar
+      </button>
+      <button id="btnAbout" class="btn ghost" type="button" title="¿Qué es esto?" aria-label="Información">
+        ?
+      </button>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap" role="main" tabindex="-1">
+    <noscript>
+      <div class="panel" style="margin:14px 0; padding:14px 16px;">
+        <strong>Esto necesita JavaScript</strong>
+        <div class="muted" style="margin-top:6px; line-height:1.5;">
+          Tu navegador lo tiene apagado. Actívalo para que carguen los módulos y se guarde el progreso.
+        </div>
+      </div>
+    </noscript>
+
+    <section class="hero" aria-label="Introducción">
+      <div class="heroCard">
+        <h1>Tu cuerpo manda. El kit se adapta.</h1>
+        <p>
+          Esta app te guía paso a paso. Cada módulo dura 2–5 minutos:
+          explicación corta, práctica y mini-chequeo. El progreso se guarda en tu navegador.
+        </p>
+
+        <div class="heroRow" role="list" aria-label="Características">
+          <div class="pill" role="listitem">✅ 6 módulos</div>
+          <div class="pill" role="listitem">🧠 Desde cero</div>
+          <div class="pill" role="listitem">💾 Guarda progreso</div>
+        </div>
+
+        <!-- Barra mini de estado (sin depender del JS) -->
+        <div class="heroStatus" aria-label="Estado">
+          <span class="muted" role="status" aria-live="polite">
+            Progreso: <strong id="progressTextHero">Cargando…</strong>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Contenido principal">
+      <aside class="panel" aria-label="Lista de módulos">
+        <div class="panelHead">
+          <h2>Módulos</h2>
+          <div class="muted" id="progressText" role="status" aria-live="polite">Cargando…</div>
+        </div>
+
+        <div
+          id="moduleList"
+          class="moduleList"
+          role="list"
+          aria-label="Módulos disponibles"
+        ></div>
+
+        <!-- Pequeña ayuda para uso con teclado -->
+        <div class="panelFoot muted" aria-hidden="true">
+          Tip: navega con Tab y Enter. Sí, se puede usar sin mouse. 🧠
+        </div>
+      </aside>
+
+      <section class="panel lesson" aria-label="Lección actual">
+        <div class="lessonHead">
+          <div>
+            <div class="kicker" id="lessonKicker">MÓDULO</div>
+            <h2 id="lessonTitle">Selecciona un módulo</h2>
+            <p class="muted" id="lessonDesc">Aquí aparecerá la explicación y la práctica.</p>
+          </div>
+
+          <div class="lessonActions" aria-label="Navegación de módulos">
+            <button id="btnPrev" class="btn ghost" type="button" aria-label="Módulo anterior">← Anterior</button>
+            <button id="btnNext" class="btn ghost" type="button" aria-label="Módulo siguiente">Siguiente →</button>
+          </div>
+        </div>
+
+        <div class="lessonBody">
+          <figure class="lessonMedia" aria-label="Imagen del módulo">
+            <img
+              id="lessonImg"
+              src=""
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption id="lessonCaption" class="muted"></figcaption>
+          </figure>
+
+          <div class="lessonCards">
+            <div class="card" aria-label="Explicación">
+              <h3>Explicación</h3>
+              <div id="lessonExplain" class="text"></div>
+            </div>
+
+            <div class="card" aria-label="Práctica guiada">
+              <h3>Práctica guiada</h3>
+              <div id="lessonPractice" class="text"></div>
+              <div class="row">
+                <button id="btnMarkDone" class="btn primary" type="button">
+                  Marcar como hecho
+                </button>
+                <div id="doneBadge" class="badge hidden" role="status" aria-live="polite">
+                  Hecho ✅
+                </div>
+              </div>
+            </div>
+
+            <div class="card" aria-label="Auto-chequeo">
+              <h3>Auto-chequeo (3 preguntas)</h3>
+              <form id="quizForm" class="quiz" aria-label="Formulario de preguntas"></form>
+              <div class="row">
+                <button id="btnCheckQuiz" class="btn" type="button">
+                  Revisar respuestas
+                </button>
+                <div id="quizResult" class="muted" role="status" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="card hint" aria-label="Consejos por sensación">
+              <h3>Si sientes… entonces ajusta…</h3>
+              <div id="lessonHint" class="text"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal hidden" id="modal" aria-hidden="true">
+    <div
+      class="modalCard"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalBody"
+    >
+      <div class="modalHead">
+        <h3 id="modalTitle">Info</h3>
+        <button class="iconBtn" id="btnCloseModal" type="button" aria-label="Cerrar modal">✕</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+      <div class="modalFoot">
+        <button class="btn primary" id="btnOkModal" type="button">Listo</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <span class="muted">Hecho para aprender sin sufrir. 🥁</span>
+  </footer>
+
+  <!-- Cargar JS al final, sin bloquear el render -->
+  <script src="app.js" defer></script>
+
+  <!--
+    NOTA:
+    - Si tus imágenes están en /images/*.png, perfecto.
+    - El app.js controla la ruta. Si cambiaste nombres (con tildes/espacios),
+      usa los nombres exactos en MODULES para evitar 404.
+  -->
+</body>
+</html>

@@ -1,0 +1,610 @@
+/* =============================================================================
+  styles.css — Musicala Light · Premium (mejorado)
+  - Solo visual ✅
+  - Glass suave + sombras finas ✅
+  - Estados pro (hover/active/focus/disabled/aria-current) ✅
+  - Modal con animación + accesibilidad ✅
+  - Responsive + safe-area ✅
+============================================================================= */
+
+:root{
+  /* Brand (Musicala) */
+  --mozart:#0C41C4;
+  --beethoven:#680DBF;
+  --brahms:#CE0071;
+  --bach:#220A63;
+
+  /* Neutrales */
+  --bg0:#F7F8FC;
+  --bg1:#FFFFFF;
+  --ink:#101828;
+  --muted:rgba(16,24,40,.62);
+
+  /* Líneas */
+  --line: rgba(16,24,40,.12);
+  --lineSoft: rgba(16,24,40,.08);
+
+  /* Glass */
+  --glass: rgba(255,255,255,.78);
+  --glass2: rgba(255,255,255,.62);
+  --glass3: rgba(255,255,255,.88);
+
+  /* Sombras */
+  --shadow: 0 18px 60px rgba(16,24,40,.12);
+  --shadowSoft: 0 10px 30px rgba(16,24,40,.10);
+  --shadowSm: 0 8px 18px rgba(16,24,40,.08);
+
+  /* Radios */
+  --r12:12px;
+  --r16:16px;
+  --r20:20px;
+  --r24:24px;
+
+  /* Layout */
+  --tap: 44px;
+  --max: 1180px;
+  --safeB: env(safe-area-inset-bottom, 0px);
+  --safeT: env(safe-area-inset-top, 0px);
+
+  /* Focus */
+  --focus: 0 0 0 3px rgba(12,65,196,.18), 0 0 0 7px rgba(104,13,191,.10);
+
+  /* Transiciones */
+  --t: .14s;
+  --ease: cubic-bezier(.2,.8,.2,1);
+
+  /* Tipografía */
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-24: 24px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  color: var(--ink);
+
+  background:
+    radial-gradient(1200px 700px at 20% 0%, rgba(12,65,196,.10), transparent 55%),
+    radial-gradient(900px 600px at 85% 20%, rgba(104,13,191,.12), transparent 55%),
+    radial-gradient(900px 700px at 65% 95%, rgba(206,0,113,.10), transparent 55%),
+    var(--bg0);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a{color:inherit; text-decoration:none}
+a:hover{text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px}
+img{max-width:100%; display:block}
+::selection{background: rgba(12,65,196,.14)}
+
+.hidden{display:none !important}
+.muted{color:var(--muted)}
+.text{line-height:1.55}
+.row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+/* =========================
+   Accesibilidad
+========================= */
+.skipLink{
+  position:absolute;
+  left: 14px;
+  top: 10px;
+  z-index: 999;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadowSm);
+  transform: translateY(-160%);
+  transition: transform var(--t) var(--ease);
+}
+.skipLink:focus{
+  outline:none;
+  transform: translateY(0);
+  box-shadow: var(--focus);
+}
+
+/* =========================
+   Topbar
+========================= */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  background: rgba(255,255,255,.80);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid var(--lineSoft);
+  padding: calc(14px + var(--safeT)) 18px 14px;
+
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand{display:flex; gap:12px; align-items:center; min-width: 180px}
+.logo{
+  width:44px; height:44px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--lineSoft);
+  box-shadow: var(--shadowSoft);
+}
+.brandTitle{
+  font-weight: 900;
+  letter-spacing: .2px;
+  line-height: 1.05;
+}
+.brandSub{
+  font-size: var(--fs-13);
+  color:var(--muted);
+  line-height: 1.2;
+}
+
+.topActions{display:flex; gap:10px; align-items:center}
+
+/* =========================
+   Wrap / Hero
+========================= */
+.wrap{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.hero{margin-top: 10px}
+.heroCard{
+  background: var(--glass);
+  border: 1px solid var(--lineSoft);
+  border-radius: var(--r24);
+  box-shadow: var(--shadowSoft);
+  padding: 18px 18px 16px;
+  overflow:hidden;
+  position: relative;
+}
+.heroCard::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  pointer-events:none;
+  background:
+    radial-gradient(520px 220px at 15% 0%, rgba(12,65,196,.12), transparent 60%),
+    radial-gradient(460px 220px at 80% 10%, rgba(104,13,191,.10), transparent 60%),
+    radial-gradient(420px 220px at 70% 120%, rgba(206,0,113,.08), transparent 65%);
+  opacity:.9;
+}
+.heroCard > *{position: relative}
+
+.heroCard h1{
+  margin: 0 0 6px;
+  font-size: var(--fs-24);
+  letter-spacing: .2px;
+  line-height: 1.15;
+}
+.heroCard p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.55;
+  max-width: 72ch;
+}
+
+/* Si existe un bloque tipo status en hero */
+.heroStatus{
+  margin-top: 10px;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: var(--fs-13);
+}
+
+.heroRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.pill{
+  font-size: var(--fs-13);
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.74);
+  box-shadow: 0 6px 14px rgba(16,24,40,.05);
+}
+
+/* =========================
+   Grid / Panel
+========================= */
+.grid{
+  display:grid;
+  grid-template-columns: 340px 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  align-items: start;
+}
+
+.panel{
+  background: var(--glass);
+  border: 1px solid var(--lineSoft);
+  border-radius: var(--r24);
+  box-shadow: var(--shadowSoft);
+  overflow:hidden;
+}
+
+.panelHead{
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lineSoft);
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.panelHead h2{margin:0; font-size: var(--fs-16)}
+.panelFoot{
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--lineSoft);
+  color: var(--muted);
+  font-size: var(--fs-13);
+  line-height: 1.5;
+}
+
+/* =========================
+   Module list
+========================= */
+.moduleList{padding: 10px}
+
+.moduleItem{
+  width:100%;
+  text-align:left;
+  background: var(--glass2);
+  border: 1px solid var(--lineSoft);
+  border-radius: 16px;
+  padding: 12px 12px;
+  margin: 8px 0;
+  cursor:pointer;
+
+  transition:
+    transform var(--t) var(--ease),
+    border-color var(--t) var(--ease),
+    background var(--t) var(--ease),
+    box-shadow var(--t) var(--ease);
+}
+.moduleItem:hover{
+  transform: translateY(-1px);
+  border-color: rgba(12,65,196,.22);
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 10px 22px rgba(16,24,40,.08);
+}
+.moduleItem:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(16,24,40,.07);
+}
+.moduleItem:focus{outline:none}
+.moduleItem:focus-visible{box-shadow: var(--focus)}
+/* Selección real: cuando el JS pone aria-current="true" */
+.moduleItem[aria-current="true"]{
+  background: rgba(255,255,255,.94);
+  border-color: rgba(12,65,196,.28);
+  box-shadow:
+    0 12px 28px rgba(16,24,40,.10),
+    0 0 0 1px rgba(12,65,196,.06) inset;
+}
+.moduleItem[aria-current="true"] .moduleTitle{color: var(--bach)}
+.moduleItem[aria-current="true"] .dot{background: rgba(12,65,196,.55)}
+
+.moduleTop{display:flex; justify-content:space-between; gap:10px; align-items:center}
+.moduleTitle{font-weight:900; font-size: var(--fs-14)}
+.moduleMeta{font-size: var(--fs-12); color:var(--muted)}
+.moduleSmall{margin-top:6px; font-size: var(--fs-13); color:var(--muted); line-height:1.35}
+
+.dot{
+  width:10px; height:10px; border-radius:999px;
+  background: rgba(16,24,40,.18);
+}
+.dot.done{background: rgba(52,199,89,.85)} /* verde suave */
+
+/* =========================
+   Lesson
+========================= */
+.lesson{padding-bottom: 6px}
+
+.lessonHead{
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--lineSoft);
+  display:flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.kicker{
+  font-size: var(--fs-11);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(16,24,40,.55);
+  font-weight: 900;
+}
+.lessonHead h2{margin:6px 0 6px; font-size: var(--fs-18); line-height: 1.2}
+.lessonHead p{margin:0; color: var(--muted); line-height: 1.55; max-width: 72ch}
+
+.lessonActions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+.lessonBody{
+  display:grid;
+  grid-template-columns: 340px 1fr;
+  gap: 14px;
+  padding: 14px 16px 16px;
+}
+
+.lessonMedia{
+  margin:0;
+  border-radius: var(--r20);
+  overflow:hidden;
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.78);
+  box-shadow: var(--shadowSoft);
+}
+.lessonMedia img{
+  width:100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: linear-gradient(135deg, rgba(12,65,196,.10), rgba(104,13,191,.10), rgba(206,0,113,.08));
+}
+.lessonMedia figcaption{
+  padding: 10px 12px;
+  font-size: var(--fs-12);
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.lessonCards{display:flex; flex-direction:column; gap:12px}
+.card{
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.74);
+  border-radius: var(--r20);
+  padding: 14px 14px 12px;
+  box-shadow: 0 8px 20px rgba(16,24,40,.06);
+}
+.card h3{margin:0 0 8px; font-size: var(--fs-14); line-height: 1.25}
+.hint{border-color: rgba(206,0,113,.18)}
+.hint h3{color: var(--bach)}
+
+.badge{
+  font-size: var(--fs-12);
+  font-weight: 900;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(52,199,89,.35);
+  background: rgba(52,199,89,.12);
+  color: rgba(16,24,40,.92);
+}
+
+/* =========================
+   Quiz
+========================= */
+.quiz{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.q{
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.80);
+  border-radius: 16px;
+  padding: 10px 10px;
+}
+.q label{
+  display:block;
+  font-weight: 900;
+  font-size: var(--fs-13);
+  margin-bottom:8px;
+}
+.opts{display:flex; gap:10px; flex-wrap:wrap}
+
+.radio{
+  display:flex; align-items:center; gap:8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.78);
+  cursor:pointer;
+  user-select:none;
+
+  transition:
+    border-color var(--t) var(--ease),
+    background var(--t) var(--ease),
+    transform var(--t) var(--ease);
+}
+.radio:hover{
+  border-color: rgba(12,65,196,.18);
+  background: rgba(255,255,255,.92);
+  transform: translateY(-1px);
+}
+.radio:active{transform: translateY(0)}
+.radio input{accent-color: var(--mozart)}
+
+/* =========================
+   Buttons
+========================= */
+.btn{
+  height: var(--tap);
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.88);
+  color: var(--ink);
+  cursor:pointer;
+  font-weight: 900;
+  box-shadow: var(--shadowSm);
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+
+  transition:
+    transform var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    border-color var(--t) var(--ease),
+    background var(--t) var(--ease),
+    opacity var(--t) var(--ease);
+}
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(16,24,40,.10);
+  border-color: rgba(12,65,196,.22);
+  background: rgba(255,255,255,.94);
+}
+.btn:active{
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(16,24,40,.09);
+}
+.btn:focus{outline:none}
+.btn:focus-visible{box-shadow: var(--focus)}
+
+.btn.primary{
+  background: linear-gradient(135deg, rgba(12,65,196,.96), rgba(104,13,191,.92));
+  color: #fff;
+  border-color: rgba(12,65,196,.18);
+}
+.btn.primary:hover{
+  border-color: rgba(255,255,255,.22);
+  box-shadow: 0 14px 30px rgba(12,65,196,.18);
+}
+.btn.ghost{
+  background: rgba(255,255,255,.60);
+}
+.btn.ghost:hover{background: rgba(255,255,255,.78)}
+
+.btn[disabled],
+.btn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--lineSoft) !important;
+}
+
+/* Icon button */
+.iconBtn{
+  width: var(--tap);
+  height: var(--tap);
+  border-radius: 14px;
+  border: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.88);
+  cursor:pointer;
+  font-size: 16px;
+  font-weight: 900;
+  display:grid;
+  place-items:center;
+  box-shadow: var(--shadowSm);
+  transition:
+    transform var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    border-color var(--t) var(--ease),
+    background var(--t) var(--ease);
+}
+.iconBtn:hover{
+  transform: translateY(-1px);
+  border-color: rgba(12,65,196,.22);
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 12px 26px rgba(16,24,40,.10);
+}
+.iconBtn:active{transform: translateY(0); box-shadow: 0 8px 18px rgba(16,24,40,.09)}
+.iconBtn:focus{outline:none}
+.iconBtn:focus-visible{box-shadow: var(--focus)}
+
+/* =========================
+   Footer
+========================= */
+.footer{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px 18px calc(22px + var(--safeB));
+  text-align:center;
+  color: var(--muted);
+  font-size: var(--fs-13);
+}
+
+/* =========================
+   Modal (pro + anim)
+========================= */
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(16,24,40,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 18px;
+  z-index: 50;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.modalCard{
+  width:min(560px, 100%);
+  background: #fff;
+  border-radius: var(--r24);
+  border: 1px solid var(--lineSoft);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+
+  transform: translateY(6px) scale(.99);
+  opacity: 0;
+  animation: modalIn .18s var(--ease) forwards;
+}
+@keyframes modalIn{
+  to{ transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modalHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 14px;
+  border-bottom: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.92);
+}
+.modalHead h3{margin:0; font-size: var(--fs-16); line-height: 1.2}
+.modalBody{
+  padding: 14px 14px 2px;
+  color: var(--muted);
+  line-height:1.55;
+}
+.modalFoot{
+  display:flex;
+  justify-content:flex-end;
+  gap: 10px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--lineSoft);
+  background: rgba(255,255,255,.92);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px){
+  .grid{grid-template-columns: 1fr}
+  .lessonBody{grid-template-columns: 1fr}
+  .brand{min-width: 0}
+}
+
+/* =========================
+   Motion preferences
+========================= */
+@media (prefers-reduced-motion: reduce){
+  *{transition: none !important}
+  html{scroll-behavior: auto}
+  .modalCard{animation: none; opacity: 1; transform: none}
+}
